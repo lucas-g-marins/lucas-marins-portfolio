@@ -12,11 +12,13 @@ export default function AboutMeSlides() {
       fact: "a Vancouver-based software devloper",
       colour: "from-green-200",
       image: avatar,
+      link: "https://www.linkedin.com/in/lucas-g-marins",
     },
     {
       fact: `the creator of an called app Prayer Library`,
       colour: "from-purple-200",
       image: prayerLibraryIcon,
+      link: "https://prayer-library.ca/",
     },
     {
       fact: "a fan of Tottenham, Star Wars, and mystery books",
@@ -69,7 +71,13 @@ export default function AboutMeSlides() {
         {/* <div className="w-6 h-6 bg-blue-600 rounded-full inline-block"></div> */}
         <img src={page[factNumber].image} className="inline-block h-10" />
         <h1 className="my-3 md:text-4xl">Lucas Marins is...</h1>
-        <h2 className="md:text-6xl">{currentFact}</h2>
+        <a
+          href={page[factNumber].link}
+          target="_blank"
+          className="hover:cursor-pointer"
+        >
+          <h2 className="md:text-6xl">{currentFact}</h2>
+        </a>
       </section>
       <footer className="flex justify-center items-center fixed bottom-0 left-0 w-full p-4">
         <button onClick={handlePrevious}>

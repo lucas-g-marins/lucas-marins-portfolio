@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import nextIcon from "../../assets/next.svg";
 import prevIcon from "../../assets/prev.svg";
 import randomIcon from "../../assets/random.svg";
 import avatar from "../../assets/lucas-avatar.png";
 import prayerLibraryIcon from "../../assets/pl-more-radius.png";
+import heartIcon from "../../assets/heartIcon.png";
 
 export default function AboutMeSlides() {
   const page = [
@@ -13,9 +14,14 @@ export default function AboutMeSlides() {
       image: avatar,
     },
     {
-      fact: "the creator of an called app Prayer Library",
+      fact: `the creator of an called app Prayer Library`,
       colour: "from-purple-200",
       image: prayerLibraryIcon,
+    },
+    {
+      fact: "a fan of Tottenham, Star Wars, and mystery books",
+      colour: "from-blue-200",
+      image: heartIcon,
     },
   ];
 
@@ -23,7 +29,7 @@ export default function AboutMeSlides() {
   const currentFact = page[factNumber].fact;
 
   const handleNext = () => {
-    if (factNumber < 1) {
+    if (factNumber < 2) {
       setFactNumber(factNumber + 1);
     } else {
       setFactNumber(0);
@@ -34,7 +40,24 @@ export default function AboutMeSlides() {
     if (factNumber > 0) {
       setFactNumber(factNumber - 1);
     } else {
-      setFactNumber(1);
+      setFactNumber(2);
+    }
+  };
+
+  const handleRandom = () => {
+    const randomSlide = Math.floor(Math.random() * page.length);
+    setFactNumber(randomSlide);
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+  });
+
+  const handleKeyPress = (e) => {
+    if (e.key === "ArrowRight") {
+      handleNext();
+    } else if (e.key === "ArrowLeft") {
+      handlePrevious();
     }
   };
 
@@ -52,7 +75,9 @@ export default function AboutMeSlides() {
         <button onClick={handlePrevious}>
           <img src={prevIcon} className="mx-3" />
         </button>
-        <img src={randomIcon} className="mx-3" />
+        <button onClick={handleRandom}>
+          <img src={randomIcon} className="mx-3" />
+        </button>
         <button onClick={handleNext}>
           <img src={nextIcon} className="mx-3" />
         </button>
